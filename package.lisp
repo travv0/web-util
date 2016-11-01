@@ -8,6 +8,7 @@
   (:export :*conn*
            :*sessions*
            :*session-id-cookie-name*
+           :with-db
            :execute-query-loop
            :execute-query-one
            :execute-query-modify

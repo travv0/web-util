@@ -5,6 +5,7 @@
   :licence "AGPL-3.0"
   :depends-on ("hunchentoot"
                "cl-ppcre"
-               "cl-dbi")
+               "cl-dbi"
+               "quri")
   :components ((:file "package")
                (:file "src/web-util" :depends-on ("package"))))
