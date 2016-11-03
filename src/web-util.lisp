@@ -9,6 +9,10 @@
   #+ccl (getenv target)
   #+sbcl (sb-posix:getenv target))
 
+(defun heroku-setenv (var val)
+  #+ccl (ccl:setenv var val)
+  #+sbcl (sb-posix:putenv (format nil "~a=~a" var val)))
+
 (defmacro with-db (conn &body body)
   `(let ((db-url (quri:uri (heroku-getenv "DATABASE_URL"))))
      (with-connection (,conn :postgres
