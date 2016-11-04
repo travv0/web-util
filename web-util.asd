@@ -5,6 +5,7 @@
   :licence "AGPL-3.0"
   :depends-on ("hunchentoot"
                "cl-ppcre"
+               "spinneret"
                "cl-dbi"
                "quri")
   :components ((:file "package")

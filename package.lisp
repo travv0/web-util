@@ -3,6 +3,7 @@
 (defpackage :web-util
   (:use :cl
         :hunchentoot
+        :spinneret
         :cl-ppcre
         :cl-dbi)
   (:export :*conn*
@@ -16,7 +17,17 @@
            :print-object
            :get-session-var
            :empty-string-if-nil
+           :nil-if-empty-string
            :zero-if-nil
            :is-null
            :html-escape
-           :join-string-list))
+           :join-string-list
+           :link
+           :row
+           :col
+           :col-xs
+           :col-sm
+           :col-md
+           :col-lg
+           :desktop-only
+           :mobile-only))
