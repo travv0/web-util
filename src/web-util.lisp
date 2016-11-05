@@ -47,8 +47,8 @@
   `(let* ((q (prepare *conn* ,query))
 	  ,(if params
 	       `(result (execute q ,@params))
-	       `(result (execute q)))
-	  (declare (ignore result)))))
+	       `(result (execute q))))
+     (declare (ignore result))))
 
 (defun random-elt (choices)
   "Choose an element from a list at random."
