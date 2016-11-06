@@ -94,7 +94,7 @@
 
 (defun join-string-list (list &optional (separator " "))
   (with-output-to-string (s)
-    (loop :for a :on list :do
+    (loop :for a :on (remove "" list :test #'equal) :do
        (write-string (car a) s)
        (unless (null (cdr a)) (write-string separator s)))))
 
