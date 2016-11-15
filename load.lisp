@@ -5,6 +5,7 @@
 (ql:quickload "cl-ppcre")
 (ql:quickload "quri")
 (ql:quickload "spinneret")
+(ql:quickload "dbd-postgres")
 
 (require "asdf")
 (asdf:load-system :web-util)
