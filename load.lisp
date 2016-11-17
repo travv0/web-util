@@ -6,6 +6,7 @@
 (ql:quickload "quri")
 (ql:quickload "spinneret")
 (ql:quickload "local-time")
+(ql:quickload "dbd-postgres")
 
 (require "asdf")
 (asdf:load-system :web-util)
