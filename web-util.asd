@@ -6,6 +6,7 @@
   :depends-on ("hunchentoot"
                "cl-ppcre"
                "spinneret"
+               "local-time"
                "cl-dbi"
                "quri")
   :components ((:file "package")

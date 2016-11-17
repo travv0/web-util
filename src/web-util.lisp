@@ -16,38 +16,38 @@
 (defmacro with-db (conn &body body)
   `(let ((db-url (quri:uri (heroku-getenv "DATABASE_URL"))))
      (with-connection (,conn :postgres
-			     :host (format nil "~a" (quri:uri-host db-url))
-			     :username (first (split-sequence:split-sequence
-					       #\: (quri:uri-userinfo db-url)))
-			     :password (second (split-sequence:split-sequence
-						#\: (quri:uri-userinfo db-url)))
-			     :database-name (format nil "~a"
-						    (string-left-trim
-						     '(#\/) (quri:uri-path db-url))))
+                             :host (format nil "~a" (quri:uri-host db-url))
+                             :username (first (split-sequence:split-sequence
+                                               #\: (quri:uri-userinfo db-url)))
+                             :password (second (split-sequence:split-sequence
+                                                #\: (quri:uri-userinfo db-url)))
+                             :database-name (format nil "~a"
+                                                    (string-left-trim
+                                                     '(#\/) (quri:uri-path db-url))))
        ,@body)))
 
 (defmacro execute-query-loop (row query params &body body)
   `(let* ((q (prepare *conn* ,query))
-	  ,(if params
-	       `(result (execute q ,@params))
-	       `(result (execute q))))
+          ,(if params
+               `(result (execute q ,@params))
+               `(result (execute q))))
      (loop for ,row = (fetch result)
-	while ,row do
-	  ,@body)))
+        while ,row do
+          ,@body)))
 
 (defmacro execute-query-one (row query params &body body)
   `(let* ((q (prepare *conn* ,query))
-	  ,(if params
-	       `(result (execute q ,@params))
-	       `(result (execute q)))
-	  (,row (fetch result)))
+          ,(if params
+               `(result (execute q ,@params))
+               `(result (execute q)))
+          (,row (fetch result)))
      ,@body))
 
 (defmacro execute-query-modify (query params)
   `(let* ((q (prepare *conn* ,query))
-	  ,(if params
-	       `(result (execute q ,@params))
-	       `(result (execute q))))
+          ,(if params
+               `(result (execute q ,@params))
+               `(result (execute q))))
      (declare (ignore result))))
 
 (defun random-elt (choices)
@@ -56,14 +56,14 @@
 
 (defmethod print-object ((object hash-table) stream)
   (format stream "#HASH{~{~{(~a : ~a)~}~^ ~}}"
-	  (loop for key being the hash-keys of object
-	     using (hash-value value)
-	     collect (list key value))))
+          (loop for key being the hash-keys of object
+             using (hash-value value)
+             collect (list key value))))
 
 (defun get-session-var (session-var)
   (let ((session (gethash (cookie-in *session-id-cookie-name*) *sessions*)))
     (if session
-	(gethash session-var session))))
+        (gethash session-var session))))
 
 (defun empty-string-if-nil (value)
   (if (not value)
@@ -101,47 +101,50 @@
 (defmacro link (text url &key new-tab tooltip)
   `(with-html
      (:a :href ,url
-	 :target ,(when new-tab
-		    "_blank")
-	 :title ,tooltip
-	 ,text)))
+         :target ,(when new-tab
+                    "_blank")
+         :title ,tooltip
+         ,text)))
 
 (defmacro row (&body body)
   `(with-html
      (:div :class "row"
-	   ,@body)))
+           ,@body)))
 
 (defmacro col (size &body body)
   `(with-html
      (:div :class (format nil "col-xs-~d" ,size)
-	   ,@body)))
+           ,@body)))
 
 (defmacro col-xs (size &body body)
   `(with-html
      (:div :class (format nil "col-xs-~d" ,size)
-	   ,@body)))
+           ,@body)))
 
 (defmacro col-sm (size &body body)
   `(with-html
      (:div :class (format nil "col-sm-~d" ,size)
-	   ,@body)))
+           ,@body)))
 
 (defmacro col-md (size &body body)
   `(with-html
      (:div :class (format nil "col-md-~d" ,size)
-	   ,@body)))
+           ,@body)))
 
 (defmacro col-lg (size &body body)
   `(with-html
      (:div :class (format nil "col-lg-~d" ,size)
-	   ,@body)))
+           ,@body)))
 
 (defmacro desktop-only (&body body)
   `(with-html
      (:span :class "hidden-xs"
-	    ,@body)))
+            ,@body)))
 
 (defmacro mobile-only (&body body)
   `(with-html
      (:span :class "visible-xs-inline"
-	    ,@body)))
+            ,@body)))
+
+(defun universal-to-unix (time)
+  (timestamp-to-unix (universal-to-timestamp time)))
