@@ -21,6 +21,7 @@
            :nil-if-empty-string
            :zero-if-nil
            :is-null
+           :null-p
            :html-escape
            :join-string-list
            :link
