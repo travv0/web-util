@@ -80,8 +80,11 @@
       0
       value))
 
-(defun is-null (x)
+(defun null-p (x)
   (equal x :null))
+
+(defun is-null (x)
+  (is-null-p x))
 
 (defun html-escape (text)
   (regex-replace-all
