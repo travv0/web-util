@@ -80,6 +80,14 @@
       0
       value))
 
+(defun nil-if-null (value)
+  (not (null-p value)))
+
+(defun empty-string-if-null (value)
+  (if (null-p value)
+      ""
+      value))
+
 (defun null-p (x)
   (equal x :null))
 

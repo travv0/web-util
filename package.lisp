@@ -20,6 +20,8 @@
            :empty-string-if-nil
            :nil-if-empty-string
            :zero-if-nil
+           :nil-if-null
+           :empty-string-if-null
            :is-null
            :null-p
            :html-escape
