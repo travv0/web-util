@@ -92,7 +92,8 @@
   (equal x :null))
 
 (defun is-null (x)
-  (is-null-p x))
+  (log-message* "NOTE" "is-null is deprecated, please use null-p instead.")
+  (null-p x))
 
 (defun html-escape (text)
   (regex-replace-all
